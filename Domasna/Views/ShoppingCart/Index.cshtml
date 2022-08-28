@@ -1,0 +1,46 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<Domasna.Domain.StripeSettings> Stripe
+
+@model Domasna.Domain.DTO.ShoppingCartDto;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row m-5">
+        <table class="table">
+            <tbody class="row">
+                @if (Model.Tickets.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5">No added Recipies</td>
+                    </tr>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.Tickets.Count; i++)
+                    {
+                        var item = Model.Tickets[i];
+
+            <tr class="col-3 px-4 text-center" >
+                <td class="card" style="height: 18.5rem; ">
+                    <div style="aspect-ratio: 1/1">
+                        <img class=" img-fluid" src="@item.Ticket.TicketImage" width="100" height="180" />
+                    </div>
+                    <div class="d-block mt-2 font-weight-bold" style="font-size: 1.2rem">@item.Ticket.TicketName</div>
+                    <div class="d-flex justify-content-between mt-3 align-content-end">
+                        <a asp-controller="Tickets" asp-action="Details"asp-route-id="@item.Ticket.Id" class="btn btn-dark me-2">View</a>
+                        <a asp-controller="ShoppingCart" asp-action="DeleteFromShoppingCart" asp-route-id="@item.TicketId" class="btn btn-danger ms-2">Remove</a>
+                    </div>
+                </td>
+            </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

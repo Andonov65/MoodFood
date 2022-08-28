@@ -1,0 +1,42 @@
+﻿@model Domasna.Domain.DomainModels.TicketProduct
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row d-flex justify-content-between">
+        <div class="col-6">
+            <div class="d-flex">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TicketProductName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TicketProductName)
+        </dd>
+</div>
+<dd class="col-sm-10">
+    <img class="card-img-top img-fluid" src="@Model.TicketProductImage" alt="Image for ticket!" />
+</dd>
+        </div>
+<div class="col-6 d-flex align-items-center">
+        <dd class="d-block">
+            @Html.DisplayFor(model => model.TicketProductDescription)
+        </dd>
+</div>
+<dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.TicketProductsMacros)
+</dt>
+<dd class="col-sm-10">
+    @Html.DisplayFor(model => model.TicketProductsMacros)
+</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-dark m-1">Back</a>
+</div>
+

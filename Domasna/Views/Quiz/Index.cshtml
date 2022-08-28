@@ -1,0 +1,210 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="font-quiz-size">
+    <div id="quiz"></div>
+    <button id="submit">Submit</button>
+    <div id="results"></div>
+</div>
+
+
+<script>
+    var myQuestions = [
+        {
+            question: "Which One Of These Exercises Is Most Effective For Weight Loss?",
+            answers: {
+                a: 'Cardio',
+                b: 'Yoga',
+                c: 'Strength exercises',
+                d: 'Balance exercises'
+            },
+            correctAnswer: 'a'
+        },
+        {
+            question: "What Does HIIT Stand For?",
+            answers: {
+                a: 'Heat',
+                b: 'High-interval intensity training',
+                c: 'High-interval intensity therapy',
+                d: 'High-intensity interval training'
+            },
+            correctAnswer: 'd'
+        },
+        {
+            question: "How Do You Call The Layer Of Fat Around Your Waistline?",
+            answers: {
+                a: 'Muffin top',
+                b: 'Beer belly',
+                c: 'Love handles',
+                d: 'Tummy'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Agonist Muscles Are Responsible For Relaxing.",
+            answers: {
+                a: 'True',
+                b: 'False'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Ab Exercises Are Enough To Burn Your Belly Fat.",
+            answers: {
+                a: 'True',
+                b: 'False'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Which Piece Of Equipment Will Be Useless For The Basic Squat?",
+            answers: {
+                a: 'Dumbbells',
+                b: 'Bar',
+                c: 'Ankle weights',
+                d: 'Foam roller'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "The range of motion of joints is",
+            answers: {
+                a: 'Muscular power',
+                b: 'Flexibility',
+                c: 'Agility',
+                d: 'All of these'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "Which component involves working continuously for a long period of time?",
+            answers: {
+                a: 'Muscular endurance',
+                b: 'Speed',
+                c: 'Balance',
+                d: 'All'
+            },
+            correctAnswer: 'a'
+        },
+        {
+            question: "The 50-meter sprint test can indicate an athlete.",
+            answers: {
+                a: 'Balance',
+                b: 'Power',
+                c: 'Speed',
+                d: 'Agility'
+            },
+            correctAnswer: 'c'
+        },
+        {
+            question: "Muscular endurance is the ability to exert a single maximal contraction.",
+            answers: {
+                a: 'True',
+                b: 'False'
+            },
+            correctAnswer: 'b'
+        },
+
+    ];
+    var quizContainer = document.getElementById('quiz');
+    var resultsContainer = document.getElementById('results');
+    var submitButton = document.getElementById('submit');
+
+    generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+    function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+
+        function showQuestions(questions, quizContainer) {
+            var output = [];
+            var answers;
+
+            for (var i = 0; i < questions.length; i++) {
+
+                answers = [];
+
+                for (letter in questions[i].answers) {
+
+                   
+                    answers.push(
+                        '<label class="d-block">'
+                        + '<input type="radio" name="question' + i + '" value="' + letter + '">'
+                        + letter + ': '
+                        + questions[i].answers[letter]
+                        + '</label>'
+                    );
+                }
+
+                output.push(
+                    '<div class="question">' + questions[i].question + '</div>'
+                    + '<div class="answers">' + answers.join('') + '</div>'
+                );
+            }
+
+            quizContainer.innerHTML = output.join('');
+        }
+
+        function showResults(questions, quizContainer, resultsContainer) {
+            var answerContainers = quizContainer.querySelectorAll('.answers');
+
+            var userAnswer = '';
+            var numCorrect = 0;
+
+            for (var i = 0; i < questions.length; i++) {
+
+                userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+                if (userAnswer === questions[i].correctAnswer) {
+                    numCorrect++;
+
+                    answerContainers[i].style.color = 'lightgreen';
+                }
+                else {
+                    answerContainers[i].style.color = 'red';
+                }
+            }
+
+            resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+        }
+
+        
+        showQuestions(questions, quizContainer);
+
+        
+        submitButton.onclick = function () {
+            showResults(questions, quizContainer, resultsContainer);
+        }
+    }
+</script>
+<style>
+    .font-quiz-size {
+        font-size: 20px;
+        font-family: sans-serif;
+        color: #333;
+    }
+
+    .question {
+        font-weight: 600;
+    }
+
+    .answers {
+        margin-bottom: 20px;
+    }
+
+    #submit {
+        font-family: sans-serif;
+        font-size: 20px;
+        background-color: #297;
+        color: #fff;
+        border: 0px;
+        border-radius: 3px;
+        padding: 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    #submit:hover {
+        background-color: #3a8;
+    }
+</style>

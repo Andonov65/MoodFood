@@ -1,0 +1,27 @@
+﻿@model Domasna.Domain.DTO.AddToShoppingCardDto
+
+@{ 
+    ViewData["Title"] = "Add to Shopping Card";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Add Selected Recepie to Book with Recepies:</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4 m-auto">
+        <form asp-action="AddTicketToCard" method="post">
+            <input type="hidden" asp-for="TicketId" />
+            <div class="form-group">
+                <label asp-for="SelectedTicket.TicketName"></label>
+                <input disabled asp-for="SelectedTicket.TicketName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary"  />
+            </div>
+        </form>
+    </div>
+</div>

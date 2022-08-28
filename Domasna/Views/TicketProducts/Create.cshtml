@@ -1,0 +1,47 @@
+﻿@model Domasna.Domain.DomainModels.TicketProduct
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TicketProductName" class="control-label"></label>
+                <input asp-for="TicketProductName" class="form-control" />
+                <span asp-validation-for="TicketProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketProductImage" class="control-label"></label>
+                <input asp-for="TicketProductImage" class="form-control" />
+                <span asp-validation-for="TicketProductImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketProductDescription" class="control-label"></label>
+                <textarea asp-for="TicketProductDescription" class="form-control" ></textarea>
+                <span asp-validation-for="TicketProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketProductsMacros" class="control-label"></label>
+                <textarea asp-for="TicketProductsMacros" class="form-control" ></textarea>
+                <span asp-validation-for="TicketProductsMacros" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

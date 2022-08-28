@@ -1,0 +1,51 @@
+﻿@model List<Domasna.Domain.DomainModels.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<div class="container">
+
+
+    @{
+        for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+
+            if (i % 4 == 0)
+            {
+                @:<div class="row">
+                }
+
+                <div class="col-md-3 my-4">
+
+                    <div class="card" style="width: 16rem; height: 30rem">
+
+                        <img class="card-img-top img-fluid" src="@item.TicketImage" style="height: 50%" alt="Image for ticket!" />
+
+                        <div class="card-body text-center">
+                            <h3 class="card-title">@item.TicketName</h3>
+                            <h6>Recipe Price: @item.TicketPrice &euro;</h6>
+                        </div>
+
+                        <div class="m-3 text-center">
+                            <a asp-controller="Tickets" asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark m-1">View</a> 
+                        </div>
+
+                    </div>
+                </div>
+
+
+                if (i % 4 == 3)
+                {
+                @:</div>
+            }
+        }
+    }
+
+
+</div>
+
