@@ -1,5 +1,7 @@
 ﻿@model Domasna.Domain.DomainModels.Ticket
-
+@using Microsoft.AspNetCore.Identity
+@using Domasna.Domain.Identity
+@inject SignInManager<DomasnaApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Details";
 }
@@ -11,27 +13,31 @@
     <dl class="row d-flex justify-content-between">
         <div class="col-6">
             <div class="d-flex">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.TicketName)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.TicketName)
-                </dd>
-            </div>
-            <dd class="col-sm-10">
-                <img class="card-img-top img-fluid" src="@Model.TicketImage" alt="Image for ticket!" />
-            </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TicketName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TicketName)
+        </dd>
+</div>
+<dd class="col-sm-10">
+    <img class="card-img-top img-fluid" src="@Model.TicketImage" alt="Image for ticket!" />
+</dd>
         </div>
-            <div class="col-6 d-flex align-items-center">
-                <div>
-                        <dd class="d-block">
-                            @Html.DisplayFor(model => model.TicketDescription)
-                        </dd>
-                        <div class="d-block mt-4">
-                            <a asp-controller="Tickets" asp-action="AddTicketToCard" asp-route-id="@Model.Id" class="btn btn-info m-1">Add to Book with recepies</a>
-                        </div>
-                </div>
-              </div>
+<div class="col-6 d-flex align-items-center">
+    <div>
+        <dd class="d-block">
+            @Html.DisplayFor(model => model.TicketDescription)
+        </dd>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="d-block mt-4">
+                <a asp-controller="Tickets" asp-action="AddTicketToCard" asp-route-id="@Model.Id" class="btn btn-info m-1">Add to Book with recepies</a>
+            </div>
+        }
+
+    </div>
+</div>
 <dt class="col-sm-2">
     @Html.DisplayNameFor(model => model.TicketPrice)
 </dt>
