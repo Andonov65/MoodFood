@@ -26,7 +26,6 @@ namespace Domasna.Repository
         {
             base.OnModelCreating(builder);
 
-    
 
             builder.Entity<Ticket>()
                 .Property(z => z.Id)
