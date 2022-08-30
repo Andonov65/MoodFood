@@ -91,7 +91,7 @@ namespace Domasna.Services.Implementation
                 EmailMessage message = new EmailMessage();
                 message.MailTo = loggedInUser.Email;
                 message.Subject = "Successfully created order";
-                message.Status = false;
+                //message.Status = false;
 
                 Order order = new Order
                 {

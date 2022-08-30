@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Domasna.Repository.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,12 +57,26 @@ namespace Domasna.Repository.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     MailTo = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: false)
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmailMessages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketProducts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    TicketProductName = table.Column<string>(nullable: false),
+                    TicketProductImage = table.Column<string>(nullable: false),
+                    TicketProductDescription = table.Column<string>(nullable: false),
+                    TicketProductsMacros = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketProducts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +100,7 @@ namespace Domasna.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -106,7 +121,7 @@ namespace Domasna.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -283,8 +298,7 @@ namespace Domasna.Repository.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -310,8 +324,7 @@ namespace Domasna.Repository.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserId",
@@ -322,8 +335,7 @@ namespace Domasna.Repository.Migrations
                 name: "IX_ShoppingCarts_OwnerId",
                 table: "ShoppingCarts",
                 column: "OwnerId",
-                unique: true,
-                filter: "[OwnerId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TicketInOrders_OrderId",
@@ -361,6 +373,9 @@ namespace Domasna.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "TicketInShoppingCarts");
+
+            migrationBuilder.DropTable(
+                name: "TicketProducts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -20,9 +20,9 @@ namespace Domasna.Services.Implementation
             _emailService = emailService;
         }
         
-        public async Task DoWork()
-        {
-            await _emailService.SendEmailAsync(_emailRepository.GetAll().Where(z => !z.Status).ToList());
-        }
+        //public async Task DoWork()
+        //{
+        //    await _emailService.SendEmailAsync(_emailRepository.GetAll().Where(z => !z.Status).ToList());
+        //}
     }
 }

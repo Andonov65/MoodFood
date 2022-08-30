@@ -12,6 +12,5 @@ namespace Domasna.Domain.DomainModels
 
         public string Content { get; set; }
 
-        public Boolean Status { get; set; }
     }
 }

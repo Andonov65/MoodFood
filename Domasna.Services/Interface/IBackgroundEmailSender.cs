@@ -7,6 +7,6 @@ namespace Domasna.Services.Interface
 {
     public interface IBackgroundEmailSender
     {
-        Task DoWork();
+        //Task DoWork();
     }
 }
